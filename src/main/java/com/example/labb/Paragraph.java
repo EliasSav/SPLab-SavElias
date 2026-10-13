@@ -16,13 +16,17 @@ public class Paragraph extends Element {
         this.alignStrategy = alignStrategy;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         if (alignStrategy != null) {
             alignStrategy.render(this);
         } else {
             System.out.println("Paragraph: " + text);
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

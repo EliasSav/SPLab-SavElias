@@ -7,17 +7,27 @@ public class Table extends Element {
         this.title = title;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         System.out.println("Table with title: " + title);
     }
 
     @Override
-    public void add(Element element) {}
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 
     @Override
-    public void remove(Element element) {}
+    public void add(Element element) {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public Element get(int index) { return null; }
+    public void remove(Element element) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Element get(int index) {
+        throw new UnsupportedOperationException();
+    }
 }

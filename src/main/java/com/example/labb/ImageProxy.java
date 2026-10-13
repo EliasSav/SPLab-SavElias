@@ -15,10 +15,13 @@ public class ImageProxy extends Element {
         return realImage;
     }
 
+    public void render() {
+        loadImage().render();
+    }
+
     @Override
-    public void print() {
-        loadImage();
-        realImage.print();
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
