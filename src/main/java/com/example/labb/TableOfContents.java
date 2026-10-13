@@ -1,19 +1,28 @@
 package com.example.labb;
 
 public class TableOfContents extends Element {
-    @Override
-    public void print() {
+
+    public void render() {
         System.out.println("TableOfContents");
     }
 
     @Override
-    public void add(Element element) {}
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 
     @Override
-    public void remove(Element element) {}
+    public void add(Element element) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void remove(Element element) {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public Element get(int index) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

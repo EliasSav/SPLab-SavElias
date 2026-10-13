@@ -3,7 +3,7 @@ package com.example.labb;
 public abstract class Element {
     protected Element parent;
 
-    public abstract void print();
+    public abstract void accept(Visitor visitor);
     public abstract void add(Element element);
     public abstract void remove(Element element);
     public abstract Element get(int index);

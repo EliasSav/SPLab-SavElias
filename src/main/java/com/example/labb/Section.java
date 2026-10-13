@@ -4,25 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Section extends Element {
-    private String title;
-    private List<Element> children = new ArrayList<>();
+    private final String title;
+    protected final List<Element> children = new ArrayList<>();
 
     public Section(String title) {
         this.title = title;
     }
 
-    @Override
-    public void print() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void render() {
         System.out.println(title);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        acceptChildren(visitor);
+    }
+
+    protected void acceptChildren(Visitor visitor) {
         for (Element child : children) {
-            child.print();
+            child.accept(visitor);
         }
     }
 
     @Override
     public void add(Element element) {
+        if (element == null) {
+            throw new IllegalArgumentException("Element cannot be null");
+        }
         if (element.getParent() != null) {
-            throw new RuntimeException("Element already added!");
+            throw new IllegalStateException("Element already added to another section!");
+        }
+        for (Element p = this; p != null; p = p.getParent()) {
+            if (p == element) {
+                throw new IllegalArgumentException("Cycle detected");
+            }
         }
         element.setParent(this);
         children.add(element);
@@ -30,7 +50,9 @@ public class Section extends Element {
 
     @Override
     public void remove(Element element) {
-        children.remove(element);
+        if (children.remove(element)) {
+            element.setParent(null);
+        }
     }
 
     @Override

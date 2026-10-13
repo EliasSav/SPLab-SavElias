@@ -3,13 +3,11 @@ package com.example.labb;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
-    private String title;
-    private List<Author> authors = new ArrayList<>();
-    private List<Element> contents = new ArrayList<>();
+public class Book extends Section {
+    private final List<Author> authors = new ArrayList<>();
 
     public Book(String title) {
-        this.title = title;
+        super(title);
     }
 
     public void addAuthor(Author author) {
@@ -17,17 +15,21 @@ public class Book {
     }
 
     public void addContent(Element element) {
-        contents.add(element);
+        add(element);
     }
 
-    public void print() {
-        System.out.println("Book: " + title);
+    @Override
+    public void render() {
+        System.out.println("Book: " + getTitle());
         System.out.println("Authors:");
         for (Author author : authors) {
             author.print();
         }
-        for (Element element : contents) {
-            element.print();
-        }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        acceptChildren(visitor);
     }
 }
