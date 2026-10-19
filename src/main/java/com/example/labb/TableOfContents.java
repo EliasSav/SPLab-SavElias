@@ -1,9 +1,20 @@
 package com.example.labb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableOfContents extends Element {
+    private final List<String> entries = new ArrayList<>();
+
+    public void addEntry(String title, int level, int page) {
+        entries.add("  ".repeat(level) + title + ", page: " + page);
+    }
 
     public void render() {
-        System.out.println("TableOfContents");
+        System.out.println("Table of Contents:");
+        for (String entry : entries) {
+            System.out.println(entry);
+        }
     }
 
     @Override

@@ -19,6 +19,18 @@ public class LabbApplication {
         BookStatistics stats = new BookStatistics();
         cap1.accept(stats);
         stats.printStatistics();
+
+        Book book = new Book("Noapte buna, copii!");
+        Section c1 = new Section("Capitolul 1");
+        Section c11 = new Section("Capitolul 1.1");
+        Section c2 = new Section("Capitolul 2");
+        book.addContent(c1);
+        c1.add(c11);
+        c1.add(new Paragraph("Text"));
+        book.addContent(c2);
+        GenerateToC generator = new GenerateToC();
+        book.accept(generator);
+        generator.getToC().render();
         //cap1.accept(new RenderContentVisitor());
     }
 }
