@@ -1,8 +1,17 @@
 package com.example.labb;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+@Entity
 public class Paragraph extends Element {
     private String text;
+
+    @Transient
     private AlignStrategy alignStrategy;
+
+    protected Paragraph() {
+    }
 
     public Paragraph(String text) {
         this.text = text;

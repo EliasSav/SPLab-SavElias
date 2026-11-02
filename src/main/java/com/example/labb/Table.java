@@ -1,14 +1,24 @@
 package com.example.labb;
 
+import jakarta.persistence.Entity;
+
+@Entity(name = "TableElement")
 public class Table extends Element {
     private String title;
+
+    protected Table() {
+    }
 
     public Table(String title) {
         this.title = title;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void render() {
-        System.out.println("Table with title: " + title);
+        System.out.println("Table: " + title);
     }
 
     @Override
