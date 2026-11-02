@@ -1,21 +1,24 @@
 package com.example.labb;
 
-import java.util.concurrent.TimeUnit;
+import jakarta.persistence.Entity;
 
+@Entity
 public class Image extends Element {
     private String url;
 
+    protected Image() {
+    }
+
     public Image(String url) {
         this.url = url;
-        try {
-            TimeUnit.SECONDS.sleep(5); // Simulează încărcarea unei imagini mari
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public void render() {
-        System.out.println("Image with name:" + url);
+        System.out.println("Image: " + url);
     }
 
     @Override

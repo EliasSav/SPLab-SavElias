@@ -1,11 +1,21 @@
 package com.example.labb;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Section extends Element {
-    private final String title;
-    protected final List<Element> children = new ArrayList<>();
+    private String title;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "section_id")
+    @OrderColumn(name = "position")
+    protected List<Element> children = new ArrayList<>();
+
+    protected Section() {
+    }
 
     public Section(String title) {
         this.title = title;
@@ -13,6 +23,14 @@ public class Section extends Element {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Element> getChildren() {
+        return children;
     }
 
     public void render() {

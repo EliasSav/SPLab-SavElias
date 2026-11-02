@@ -1,13 +1,36 @@
 package com.example.labb;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Book extends Section {
-    private final List<Author> authors = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Author> authors = new LinkedHashSet<>();
+
+    private String isbn;
+
+    protected Book() {
+    }
 
     public Book(String title) {
         super(title);
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public void addAuthor(Author author) {

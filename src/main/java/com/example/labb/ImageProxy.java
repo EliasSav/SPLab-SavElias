@@ -1,14 +1,29 @@
 package com.example.labb;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+@Entity
 public class ImageProxy extends Element {
     private String url;
-    private Image realImage = null;
+
+    @Transient
+    private Image realImage;
+
+    protected ImageProxy() {
+    }
 
     public ImageProxy(String url) {
         this.url = url;
     }
 
-    public Image loadImage() {
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonIgnore
+    private Image loadImage() {
         if (realImage == null) {
             realImage = new Image(url);
         }
