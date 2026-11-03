@@ -2,15 +2,15 @@ package com.example.labb.commands;
 
 import com.example.labb.Book;
 import com.example.labb.models.BookDto;
-import com.example.labb.persistence.BooksRepository;
+import com.example.labb.persistence.CrudRepository;
 import com.example.labb.services.BookNotFoundException;
 
 public class UpdateBookCommand implements Command<Book> {
-    private final BooksRepository repo;
+    private final CrudRepository<Book, Long> repo;
     private final long id;
     private final BookDto data;
 
-    public UpdateBookCommand(BooksRepository repo, long id, BookDto data) {
+    public UpdateBookCommand(CrudRepository<Book, Long> repo, long id, BookDto data) {
         this.repo = repo;
         this.id = id;
         this.data = data;
