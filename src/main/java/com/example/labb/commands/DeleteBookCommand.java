@@ -1,13 +1,14 @@
 package com.example.labb.commands;
 
-import com.example.labb.persistence.BooksRepository;
+import com.example.labb.Book;
+import com.example.labb.persistence.CrudRepository;
 import com.example.labb.services.BookNotFoundException;
 
 public class DeleteBookCommand implements Command<Void> {
-    private final BooksRepository repo;
+    private final CrudRepository<Book, Long> repo;
     private final long id;
 
-    public DeleteBookCommand(BooksRepository repo, long id) {
+    public DeleteBookCommand(CrudRepository<Book, Long> repo, long id) {
         this.repo = repo;
         this.id = id;
     }

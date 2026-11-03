@@ -3,7 +3,7 @@ package com.example.labb.controllers;
 import com.example.labb.Book;
 import com.example.labb.commands.*;
 import com.example.labb.models.BookDto;
-import com.example.labb.persistence.BooksRepository;
+import com.example.labb.persistence.CrudRepository;
 import com.example.labb.services.IsbnService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/books")
 public class BooksController {
-    private final BooksRepository repo;
+    private final CrudRepository<Book, Long> repo;
     private final IsbnService isbnService;
     private final CommandExecutor syncExecutor;
     private final CommandExecutor asyncExecutor;
 
-    public BooksController(BooksRepository repo,
+    public BooksController(CrudRepository<Book, Long> repo,
                            IsbnService isbnService,
                            @Qualifier("syncExecutor") CommandExecutor syncExecutor,
                            @Qualifier("asyncExecutor") CommandExecutor asyncExecutor) {
